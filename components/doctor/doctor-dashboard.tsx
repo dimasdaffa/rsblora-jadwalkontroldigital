@@ -668,11 +668,52 @@ export function DoctorDashboard() {
 
   const getDoctorPatients = () => {
     const currentUser = JSON.parse(getCookie("user") || "{}")
-    return todayAppointments.map((apt) => ({
-      id: apt.patientId,
-      name: apt.patientName,
-      email: apt.patientEmail,
-    }))
+    
+    // Get all appointments for this doctor (not just today's)
+    const allDoctorAppointments = allAppointments
+    
+    // Get all unique patients from appointments
+    const appointmentPatients = new Map()
+    allDoctorAppointments.forEach((apt) => {
+      if (!appointmentPatients.has(apt.patientEmail)) {
+        appointmentPatients.set(apt.patientEmail, {
+          id: apt.patientId || apt.patientEmail,
+          name: apt.patientName,
+          email: apt.patientEmail,
+        })
+      }
+    })
+    
+    // Also get patients from the patient list
+    patients.forEach((patient) => {
+      if (!appointmentPatients.has(patient.email)) {
+        appointmentPatients.set(patient.email, {
+          id: patient.id,
+          name: patient.name,
+          email: patient.email,
+        })
+      }
+    })
+    
+    // Get registered patients from localStorage who might have appointments
+    try {
+      const registeredPatients = JSON.parse(localStorage.getItem("hospital_users") || "[]")
+        .filter((user: any) => user.role === "patient")
+      
+      registeredPatients.forEach((patient: any) => {
+        if (!appointmentPatients.has(patient.email)) {
+          appointmentPatients.set(patient.email, {
+            id: patient.id,
+            name: patient.name || `${patient.firstName} ${patient.lastName}`.trim(),
+            email: patient.email,
+          })
+        }
+      })
+    } catch (error) {
+      console.error("Error loading registered patients:", error)
+    }
+    
+    return Array.from(appointmentPatients.values()).filter(p => p.name && p.email)
   }
 
   return (

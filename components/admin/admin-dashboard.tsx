@@ -1050,10 +1050,18 @@ export default function AdminDashboard() {
                       </DialogHeader>
                       <UnifiedUserForm
                         user={editingUser}
-                        onSubmit={handleCreateUnifiedUser}
+                        onSubmit={(userData, doctorData) => {
+                          if (editingUser) {
+                            // If editing an existing user, call update function with the user's ID
+                            handleUpdateUser(editingUser.id, userData);
+                          } else {
+                            // If creating a new user, call create function
+                            handleCreateUnifiedUser(userData, doctorData);
+                          }
+                        }}
                         onCancel={() => {
-                          setIsEditingUser(false)
-                          setEditingUser(null)
+                          setIsEditingUser(false);
+                          setEditingUser(null);
                         }}
                       />
                     </DialogContent>

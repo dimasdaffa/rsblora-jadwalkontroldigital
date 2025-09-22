@@ -28,11 +28,6 @@ export default function LandingPage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [currentDoctorSlide, setCurrentDoctorSlide] = useState(0)
   const [currentNewsSlide, setCurrentNewsSlide] = useState(0)
-  const [imageErrors, setImageErrors] = useState<{ [key: string]: boolean }>({})
-
-  const handleImageError = (imageKey: string) => {
-    setImageErrors((prev) => ({ ...prev, [imageKey]: true }))
-  }
 
   const doctors = [
     {
@@ -77,7 +72,7 @@ export default function LandingPage() {
     {
       title: "Pentingnya Vaksinasi untuk Keluarga",
       excerpt: "Memahami jadwal vaksinasi yang tepat untuk melindungi keluarga besar Polri dan masyarakat umum.",
-      image: "/family-vaccination.png",
+      image: "/public/family-vaccination.png",
       date: "12 Jan 2024",
       category: "Kesehatan Umum",
     },
@@ -112,21 +107,13 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 py-4 sm:py-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 sm:gap-4">
-              {!imageErrors["logo"] ? (
-                <Image
-                  src="/logo-bhayangkara.jpg"
-                  alt="RS. Bhayangkara Blora Logo"
-                  width={44}
-                  height={44}
-                  className="rounded-lg sm:w-14 sm:h-14"
-                  priority
-                  onError={() => handleImageError("logo")}
-                />
-              ) : (
-                <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold text-sm">
-                  RS
-                </div>
-              )}
+              <Image
+                src="/logo-bhayangkara.jpg"
+                alt="RS. Bhayangkara Blora Logo"
+                width={44}
+                height={44}
+                className="rounded-lg sm:w-14 sm:h-14"
+              />
               <div>
                 <h1 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 leading-tight">
                   RS. Bhayangkara Blora Tk. IV
@@ -202,20 +189,13 @@ export default function LandingPage() {
               <div className="bg-white border-b border-gray-100 p-6">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
-                    {!imageErrors["mobile-logo"] ? (
-                      <Image
-                        src="/logo-bhayangkara.jpg"
-                        alt="RS. Bhayangkara Blora Logo"
-                        width={48}
-                        height={48}
-                        className="rounded-lg shadow-sm"
-                        onError={() => handleImageError("mobile-logo")}
-                      />
-                    ) : (
-                      <div className="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
-                        RS
-                      </div>
-                    )}
+                    <Image
+                      src="/logo-bhayangkara.jpg"
+                      alt="RS. Bhayangkara Blora Logo"
+                      width={48}
+                      height={48}
+                      className="rounded-lg shadow-sm"
+                    />
                     <div>
                       <h3 className="font-bold text-gray-900 text-base leading-tight">RS. Bhayangkara Blora</h3>
                       <p className="text-sm text-gray-600">Polda Jawa Tengah</p>
@@ -413,7 +393,6 @@ export default function LandingPage() {
                       width={250}
                       height={300}
                       className="rounded-2xl shadow-lg"
-                      onError={() => handleImageError("hospital-director")}
                     />
                     <div className="absolute -bottom-4 -right-4 bg-blue-600 text-white p-3 rounded-full">
                       <Stethoscope className="h-6 w-6" />
@@ -544,20 +523,13 @@ export default function LandingPage() {
                           <CardContent className="p-6">
                             <div className="text-center">
                               <div className="relative mb-4">
-                                {!imageErrors[`doctor-${slideIndex}-${index}`] ? (
-                                  <Image
-                                    src={doctor.image}
-                                    alt={doctor.name}
-                                    width={120}
-                                    height={120}
-                                    className="rounded-full mx-auto shadow-lg object-cover"
-                                    onError={() => handleImageError(`doctor-${slideIndex}-${index}`)}
-                                  />
-                                ) : (
-                                  <div className="w-[120px] h-[120px] rounded-full mx-auto shadow-lg bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                                    <Stethoscope className="h-12 w-12 text-blue-600" />
-                                  </div>
-                                )}
+                                <Image
+                                  src={doctor.image || "/placeholder.svg"}
+                                  alt={doctor.name}
+                                  width={120}
+                                  height={120}
+                                  className="rounded-full mx-auto shadow-lg"
+                                />
                                 <div className="absolute -bottom-2 -right-2 bg-blue-600 text-white p-2 rounded-full">
                                   <Stethoscope className="h-4 w-4" />
                                 </div>
@@ -737,20 +709,13 @@ export default function LandingPage() {
                     <Card className="border-0 shadow-lg bg-white max-w-2xl mx-auto">
                       <div className="grid md:grid-cols-2 gap-0">
                         <div className="relative">
-                          {!imageErrors[`news-${index}`] ? (
-                            <Image
-                              src={news.image}
-                              alt={news.title}
-                              width={300}
-                              height={200}
-                              className="w-full h-48 md:h-full object-cover rounded-l-lg"
-                              onError={() => handleImageError(`news-${index}`)}
-                            />
-                          ) : (
-                            <div className="w-full h-48 md:h-full bg-gradient-to-br from-gray-100 to-gray-200 rounded-l-lg flex items-center justify-center">
-                              <Activity className="h-12 w-12 text-gray-400" />
-                            </div>
-                          )}
+                          <Image
+                            src={news.image || "/placeholder.svg"}
+                            alt={news.title}
+                            width={300}
+                            height={200}
+                            className="w-full h-48 md:h-full object-cover rounded-l-lg"
+                          />
                           <div className="absolute top-4 left-4">
                             <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
                               {news.category}
@@ -846,20 +811,13 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                {!imageErrors["footer-logo"] ? (
-                  <Image
-                    src="/logo-bhayangkara.jpg"
-                    alt="RS. Bhayangkara Blora Logo"
-                    width={32}
-                    height={32}
-                    className="rounded-lg sm:w-10 sm:h-10"
-                    onError={() => handleImageError("footer-logo")}
-                  />
-                ) : (
-                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">
-                    RS
-                  </div>
-                )}
+                <Image
+                  src="/logo-bhayangkara.jpg"
+                  alt="RS. Bhayangkara Blora Logo"
+                  width={32}
+                  height={32}
+                  className="rounded-lg sm:w-10 sm:h-10"
+                />
                 <div>
                   <span className="text-base sm:text-lg font-bold">RS. Bhayangkara Blora Tk. IV</span>
                   <p className="text-xs text-gray-400">Polda Jawa Tengah</p>
