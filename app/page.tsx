@@ -72,7 +72,7 @@ export default function LandingPage() {
     {
       title: "Pentingnya Vaksinasi untuk Keluarga",
       excerpt: "Memahami jadwal vaksinasi yang tepat untuk melindungi keluarga besar Polri dan masyarakat umum.",
-      image: "/public/family-vaccination.png",
+      image: "/family-vaccination.png",
       date: "12 Jan 2024",
       category: "Kesehatan Umum",
     },
@@ -107,12 +107,15 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 py-4 sm:py-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3 sm:gap-4">
-              <Image
+              <img
                 src="/logo-bhayangkara.jpg"
                 alt="RS. Bhayangkara Blora Logo"
-                width={44}
-                height={44}
-                className="rounded-lg sm:w-14 sm:h-14"
+                width="44"
+                height="44"
+                className="rounded-lg sm:w-14 sm:h-14 object-cover"
+                onError={(e) => {
+                  e.currentTarget.src = "/placeholder-logo.png";
+                }}
               />
               <div>
                 <h1 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 leading-tight">
@@ -189,12 +192,15 @@ export default function LandingPage() {
               <div className="bg-white border-b border-gray-100 p-6">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-3">
-                    <Image
+                    <img
                       src="/logo-bhayangkara.jpg"
                       alt="RS. Bhayangkara Blora Logo"
-                      width={48}
-                      height={48}
-                      className="rounded-lg shadow-sm"
+                      width="48"
+                      height="48"
+                      className="rounded-lg shadow-sm object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = "/placeholder-logo.png";
+                      }}
                     />
                     <div>
                       <h3 className="font-bold text-gray-900 text-base leading-tight">RS. Bhayangkara Blora</h3>
@@ -387,13 +393,21 @@ export default function LandingPage() {
                 </div>
                 <div className="flex justify-center">
                   <div className="relative">
-                    <Image
-                      src="/hospital-director.png"
-                      alt="Kepala Rumah Sakit"
-                      width={250}
-                      height={300}
-                      className="rounded-2xl shadow-lg"
-                    />
+                    <div className="w-[250px] h-[300px] bg-gray-200 rounded-2xl shadow-lg overflow-hidden">
+                      <img
+                        src="/hospital-director.png"
+                        alt="dr. M. ARDI WIBAWA, Sp.PD. - Kepala Rumah Sakit"
+                        className="w-full h-full object-cover"
+                        onLoad={(e) => {
+                          console.log('Image loaded successfully');
+                          e.currentTarget.style.display = 'block';
+                        }}
+                        onError={(e) => {
+                          console.log('Image failed to load, using fallback');
+                          e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='300' viewBox='0 0 250 300'%3E%3Crect width='250' height='300' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='45%25' font-size='16' fill='%23374151' text-anchor='middle' dominant-baseline='middle'%3EDr. M. ARDI WIBAWA%3C/text%3E%3Ctext x='50%25' y='55%25' font-size='14' fill='%236b7280' text-anchor='middle' dominant-baseline='middle'%3EKepala Rumah Sakit%3C/text%3E%3C/svg%3E";
+                        }}
+                      />
+                    </div>
                     <div className="absolute -bottom-4 -right-4 bg-blue-600 text-white p-3 rounded-full">
                       <Stethoscope className="h-6 w-6" />
                     </div>
@@ -523,13 +537,16 @@ export default function LandingPage() {
                           <CardContent className="p-6">
                             <div className="text-center">
                               <div className="relative mb-4">
-                                <Image
-                                  src={doctor.image || "/placeholder.svg"}
-                                  alt={doctor.name}
-                                  width={120}
-                                  height={120}
-                                  className="rounded-full mx-auto shadow-lg"
-                                />
+                                <div className="w-[120px] h-[120px] mx-auto rounded-full overflow-hidden bg-gray-200">
+                                  <img
+                                    src={doctor.image || "/placeholder.svg"}
+                                    alt={doctor.name}
+                                    className="w-full h-full object-cover"
+                                    onError={(e) => {
+                                      e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Ccircle cx='60' cy='60' r='60' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='50%25' font-size='12' fill='%23374151' text-anchor='middle' dominant-baseline='middle'%3E👨‍⚕️%3C/text%3E%3C/svg%3E";
+                                    }}
+                                  />
+                                </div>
                                 <div className="absolute -bottom-2 -right-2 bg-blue-600 text-white p-2 rounded-full">
                                   <Stethoscope className="h-4 w-4" />
                                 </div>
@@ -709,13 +726,16 @@ export default function LandingPage() {
                     <Card className="border-0 shadow-lg bg-white max-w-2xl mx-auto">
                       <div className="grid md:grid-cols-2 gap-0">
                         <div className="relative">
-                          <Image
-                            src={news.image || "/placeholder.svg"}
-                            alt={news.title}
-                            width={300}
-                            height={200}
-                            className="w-full h-48 md:h-full object-cover rounded-l-lg"
-                          />
+                          <div className="w-full h-48 md:h-full bg-gray-200 rounded-l-lg overflow-hidden">
+                            <img
+                              src={news.image || "/placeholder.svg"}
+                              alt={news.title}
+                              className="w-full h-full object-cover"
+                              onError={(e) => {
+                                e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23f3f4f6'/%3E%3Ctext x='50%25' y='45%25' font-size='14' fill='%23374151' text-anchor='middle' dominant-baseline='middle'%3EBerita Kesehatan%3C/text%3E%3Ctext x='50%25' y='55%25' font-size='12' fill='%236b7280' text-anchor='middle' dominant-baseline='middle'%3ERS Bhayangkara Blora%3C/text%3E%3C/svg%3E";
+                              }}
+                            />
+                          </div>
                           <div className="absolute top-4 left-4">
                             <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-medium">
                               {news.category}
@@ -811,12 +831,15 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             <div className="sm:col-span-2 lg:col-span-1">
               <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <Image
+                <img
                   src="/logo-bhayangkara.jpg"
                   alt="RS. Bhayangkara Blora Logo"
-                  width={32}
-                  height={32}
-                  className="rounded-lg sm:w-10 sm:h-10"
+                  width="32"
+                  height="32"
+                  className="rounded-lg sm:w-10 sm:h-10 object-cover"
+                  onError={(e) => {
+                    e.currentTarget.src = "/placeholder-logo.png";
+                  }}
                 />
                 <div>
                   <span className="text-base sm:text-lg font-bold">RS. Bhayangkara Blora Tk. IV</span>
