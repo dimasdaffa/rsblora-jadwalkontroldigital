@@ -1,0 +1,123 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(1 0 0); /* Pure white background */
+  --foreground: oklch(0.35 0.02 258.34); /* Dark gray-blue for text (#475569) */
+  --card: oklch(0.98 0.02 342.55); /* Light pink card background (#fdf2f8) */
+  --card-foreground: oklch(0.35 0.02 258.34); /* Dark gray-blue for card text */
+  --popover: oklch(1 0 0); /* White for popover backgrounds */
+  --popover-foreground: oklch(0.35 0.02 258.34); /* Dark gray-blue for popover text */
+  --primary: oklch(0.45 0.24 15.24); /* Rose-600 primary (#be123c) */
+  --primary-foreground: oklch(1 0 0); /* White text on primary buttons */
+  --secondary: oklch(0.98 0.02 342.55); /* Light pink secondary (#fdf2f8) */
+  --secondary-foreground: oklch(0.35 0.02 258.34); /* Dark gray-blue text on secondary */
+  --muted: oklch(0.99 0.01 15.69); /* Very light pink muted (#fef2f2) */
+  --muted-foreground: oklch(0.28 0.02 258.34); /* Darker gray for muted text */
+  --accent: oklch(0.65 0.25 342.55); /* Bright pink accent (#ec4899) */
+  --accent-foreground: oklch(1 0 0); /* White text on accent backgrounds */
+  --destructive: oklch(0.55 0.22 27.33); /* Red for errors (#dc2626) */
+  --destructive-foreground: oklch(1 0 0); /* White text on destructive buttons */
+  --border: oklch(0.92 0.01 286.38); /* Light gray borders (#e4e4e7) */
+  --input: oklch(0.96 0.01 220.91); /* Light gray input background (#f3f4f6) */
+  --ring: oklch(0.45 0.24 15.24 / 0.5); /* Rose primary with opacity for focus */
+  --chart-1: oklch(0.65 0.25 342.55); /* Bright pink */
+  --chart-2: oklch(0.45 0.24 15.24); /* Rose primary */
+  --chart-3: oklch(0.68 0.19 85.87); /* Amber */
+  --chart-4: oklch(0.52 0.17 85.87); /* Darker amber */
+  --chart-5: oklch(0.55 0.22 27.33); /* Red */
+  --radius: 0.5rem; /* Rounded corners */
+  --sidebar: oklch(1 0 0); /* White sidebar background */
+  --sidebar-foreground: oklch(0.35 0.02 258.34); /* Dark gray-blue sidebar text */
+  --sidebar-primary: oklch(0.65 0.25 342.55); /* Bright pink for sidebar highlights */
+  --sidebar-primary-foreground: oklch(1 0 0); /* White text on sidebar primary */
+  --sidebar-accent: oklch(0.98 0.02 342.55); /* Light pink sidebar accent */
+  --sidebar-accent-foreground: oklch(0.35 0.02 258.34); /* Dark text on sidebar accent */
+  --sidebar-border: oklch(0.92 0.01 286.38); /* Light gray sidebar borders */
+  --sidebar-ring: oklch(0.45 0.24 15.24 / 0.5); /* Rose ring for sidebar focus */
+}
+
+.dark {
+  --background: oklch(0.145 0 0); /* Dark background */
+  --foreground: oklch(0.985 0 0); /* Light text */
+  --card: oklch(0.205 0 0); /* Dark cards */
+  --card-foreground: oklch(0.985 0 0); /* Light card text */
+  --popover: oklch(0.205 0 0); /* Dark popover */
+  --popover-foreground: oklch(0.985 0 0); /* Light popover text */
+  --primary: oklch(0.45 0.24 15.24); /* Rose primary remains */
+  --primary-foreground: oklch(1 0 0); /* White text on primary */
+  --secondary: oklch(0.269 0 0); /* Dark secondary */
+  --secondary-foreground: oklch(0.985 0 0); /* Light text on secondary */
+  --muted: oklch(0.269 0 0); /* Dark muted */
+  --muted-foreground: oklch(0.708 0 0); /* Light muted text */
+  --accent: oklch(0.65 0.25 342.55); /* Bright pink accent remains */
+  --accent-foreground: oklch(1 0 0); /* White text on accent */
+  --destructive: oklch(0.55 0.22 27.33); /* Red for errors */
+  --destructive-foreground: oklch(1 0 0); /* White text on destructive */
+  --border: oklch(0.269 0 0); /* Dark borders */
+  --input: oklch(0.269 0 0); /* Dark input backgrounds */
+  --ring: oklch(0.45 0.24 15.24 / 0.5); /* Rose ring */
+  --chart-1: oklch(0.65 0.25 342.55);
+  --chart-2: oklch(0.45 0.24 15.24);
+  --chart-3: oklch(0.68 0.19 85.87);
+  --chart-4: oklch(0.52 0.17 85.87);
+  --chart-5: oklch(0.55 0.22 27.33);
+  --sidebar: oklch(0.205 0 0); /* Dark sidebar */
+  --sidebar-foreground: oklch(0.985 0 0); /* Light sidebar text */
+  --sidebar-primary: oklch(0.65 0.25 342.55); /* Pink sidebar primary */
+  --sidebar-primary-foreground: oklch(1 0 0); /* White text */
+  --sidebar-accent: oklch(0.269 0 0); /* Dark sidebar accent */
+  --sidebar-accent-foreground: oklch(0.985 0 0); /* Light accent text */
+  --sidebar-border: oklch(0.269 0 0); /* Dark sidebar borders */
+  --sidebar-ring: oklch(0.45 0.24 15.24 / 0.5); /* Rose sidebar ring */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
